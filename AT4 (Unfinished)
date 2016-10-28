@@ -1,0 +1,184 @@
+package
+{
+	import flash.display.*;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	import flash.events.MouseEvent;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	
+	public class AT4 extends Sprite
+	{
+		[Embed(source='assets/brave_new_world.mp3')] // embed the mp3 file
+		public var MySound:Class; // MySound os the class for the mp3 embedded
+		// a Sound instance from the MySound class (embedded mp3 file)
+		private var sound:Sound = new MySound;
+		
+		// a SoundChannel instance
+		private var channel:SoundChannel;
+		
+		/* music control buttons
+		private var playButton:TextField = new TextField();
+		private var pauseButton:TextField = new TextField();
+		private var stopButton:TextField = new TextField();*/
+		
+		private var isPlaying:Boolean = false;
+		private var pausePosition:Number = 0;
+		
+		
+			[Embed(source="assets/stop_button.png")]
+			private var StopImage:Class;
+			private var stopIt:Bitmap = new StopImage();
+		
+	
+			[Embed(source="assets/play_button.png")]
+			private var PlayImage:Class;
+			private var playIt:Bitmap = new PlayImage();
+		
+
+			[Embed(source="assets/pause_button.png")]
+			private var PauseImage:Class;
+			private var pauseIt:Bitmap = new PauseImage();
+		
+		
+		public function AT4()
+		{
+			super();
+			
+			
+			
+			stopIt.x = (stage.stageWidth - stopIt.width) >> 1;
+			stopIt.y = 0;
+			playIt.x = (stage.stageWidth - playIt.width) >> 1;
+			playIt.y = 250;
+			pauseIt.x = (stage.stageWidth - pauseIt.width) >> 1;
+			pauseIt.y = 500;
+			
+			stopIt.addEventListener(MouseEvent.CLICK, mouseStopIt);
+			playIt.addEventListener(MouseEvent.CLICK, mousePlayIt);
+			pauseIt.addEventListener(MouseEvent.CLICK, mousePauseIt);
+			
+			addChild(stopIt);
+			addChild(playIt);
+			addChild(pauseIt);
+			
+			// support autoOrients
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			/* music control interface design
+			playButton.selectable = pauseButton.selectable = stopButton.selectable = false;
+			playButton.background = pauseButton.background = stopButton.background = true;
+			playButton.backgroundColor = pauseButton.backgroundColor = stopButton.backgroundColor = 0x00FFFF;
+			playButton.defaultTextFormat = pauseButton.defaultTextFormat = stopButton.defaultTextFormat = new TextFormat("Arial", 100);
+			playButton.autoSize = pauseButton.autoSize = stopButton.autoSize = TextFieldAutoSize.CENTER;
+			
+			playButton.text = "Play";
+			playButton.x = (stage.stageWidth - playButton.width) >> 1;
+			playButton.y = 100;
+			addChild(playButton);
+			
+			pauseButton.text = "Pause";
+			pauseButton.x = (stage.stageWidth - pauseButton.width) >> 1;
+			pauseButton.y = 300;
+			addChild(pauseButton);
+			
+			stopButton.text = "Stop";
+			stopButton.x = (stage.stageWidth - stopButton.width) >> 1;
+			stopButton.y = 500;
+			addChild(stopButton);
+			
+			// three events share one event handler
+			playButton.addEventListener(MouseEvent.MOUSE_UP, onButtonTouchUp);
+			pauseButton.addEventListener(MouseEvent.MOUSE_UP, onButtonTouchUp);
+			stopButton.addEventListener(MouseEvent.MOUSE_UP, onButtonTouchUp);*/
+			
+			
+		}
+		
+		private function mouseStopIt(event:MouseEvent):void
+		{
+			trace ("Click!");
+			if (isPlaying) // stop only when it is currently being played
+				{
+				pausePosition = 0;
+				channel.stop();
+				isPlaying = false;
+				}
+			
+		}
+		
+		private function mousePlayIt(event:MouseEvent):void
+		{
+			trace ("Click!");
+			if (!isPlaying) // play musich only when it is not currently being played
+				{
+				channel = sound.play(pausePosition);
+				isPlaying = true;
+				}
+			
+		}
+		
+		private function mousePauseIt(event:MouseEvent):void
+		{
+			trace ("Click!");
+			if (isPlaying) // pause only when it is currently being played
+				{
+				pausePosition = channel.position;
+				channel.stop();
+				isPlaying = false;
+				}
+			
+		}
+		
+		
+		
+		/* interface interactions
+		private function onButtonTouchUp(event:MouseEvent):void
+		{
+			// get the text from the button clicked.
+			var buttonName:String = (event.currentTarget as TextField).text;
+			
+			// decide which button is selected
+			if (buttonName == "Play")
+			{
+				trace("Play button touched.");
+				if (!isPlaying) // play musich only when it is not currently being played
+				{
+					channel = sound.play(pausePosition);
+					isPlaying = true;
+				}
+			}
+			else if (buttonName == "Pause")
+			{
+				trace("Pause button touched.");
+				if (isPlaying) // pause only when it is currently being played
+				{
+					pausePosition = channel.position;
+					channel.stop();
+					isPlaying = false;
+				}
+			}
+			else if (buttonName == "Stop")
+			{
+				trace("Stop button touched.");
+				if (isPlaying) // stop only when it is currently being played
+				{
+					pausePosition = 0;
+					channel.stop();
+					isPlaying = false;
+				}
+			}
+			else
+			{
+				// empty else. never meant to happen
+			}
+		}*/
+	}
+	
+	
+	
+}
