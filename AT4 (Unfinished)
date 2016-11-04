@@ -32,16 +32,19 @@ package
 			[Embed(source="assets/stop_button.png")]
 			private var StopImage:Class;
 			private var stopIt:Bitmap = new StopImage();
+			private var stopItSprite:Sprite = new Sprite();
 		
 	
 			[Embed(source="assets/play_button.png")]
 			private var PlayImage:Class;
 			private var playIt:Bitmap = new PlayImage();
+			private var playItSprite:Sprite = new Sprite();
 		
 
 			[Embed(source="assets/pause_button.png")]
 			private var PauseImage:Class;
 			private var pauseIt:Bitmap = new PauseImage();
+			private var pauseItSprite:Sprite = new Sprite();
 		
 		
 		public function AT4()
@@ -57,13 +60,16 @@ package
 			pauseIt.x = (stage.stageWidth - pauseIt.width) >> 1;
 			pauseIt.y = 500;
 			
-			stopIt.addEventListener(MouseEvent.CLICK, mouseStopIt);
-			playIt.addEventListener(MouseEvent.CLICK, mousePlayIt);
-			pauseIt.addEventListener(MouseEvent.CLICK, mousePauseIt);
+			stopItSprite.addEventListener(MouseEvent.MOUSE_DOWN, mouseStopIt);
+			playItSprite.addEventListener(MouseEvent.MOUSE_DOWN, mousePlayIt);
+			pauseItSprite.addEventListener(MouseEvent.MOUSE_DOWN, mousePauseIt);
 			
-			addChild(stopIt);
-			addChild(playIt);
-			addChild(pauseIt);
+			stopItSprite.addChild(stopIt);
+			addChild(stopItSprite);
+			playItSprite.addChild(playIt);
+			addChild(playItSprite);
+			pauseItSprite.addChild(pauseIt);
+			addChild(pauseItSprite);
 			
 			// support autoOrients
 			stage.align = StageAlign.TOP_LEFT;
