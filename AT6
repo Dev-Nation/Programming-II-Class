@@ -1,0 +1,127 @@
+package
+{
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
+	import flash.text.TextField;
+	import flash.system.fscommand;
+	
+	public class AT6 extends Sprite
+	{
+		private var emailMe:TextField;
+		private var browser:TextField;
+		private var maps:TextField;
+		private var phone:TextField;
+		private var sms:TextField;
+		
+		public function AT6()
+		{
+			super();
+			
+			// support autoOrients
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			createUI();
+			
+			emailMe.addEventListener(MouseEvent.MOUSE_DOWN, onEmailMeTouch);
+			browser.addEventListener(MouseEvent.MOUSE_DOWN, onBrowserTouch);
+			maps.addEventListener(MouseEvent.MOUSE_DOWN, onMapsTouch);
+			phone.addEventListener(MouseEvent.MOUSE_DOWN, onPhoneTouch);
+			sms.addEventListener(MouseEvent.MOUSE_DOWN, onSMSTouch);
+		}
+		
+		private function createUI():void
+		{
+			emailMe = new TextField();
+			emailMe.text = "Email Abomination.Legion@gmail.com";
+			emailMe.width = 200;
+			emailMe.height = 50;
+			emailMe.selectable = false;
+			emailMe.background = true;
+			emailMe.backgroundColor = 0xFFFF00;
+			emailMe.x = (stage.stageWidth - emailMe.width) >> 1;
+			addChild(emailMe);
+			
+			browser = new TextField();
+			browser.text = "Browse Web";
+			browser.width = 200;
+			browser.height = 50;
+			browser.selectable = false;
+			browser.background = true;
+			browser.backgroundColor = 0xFFFF00;
+			browser.x = (stage.stageWidth - browser.width) >> 1;
+			browser.y = 100;
+			addChild(browser);
+			
+			maps = new TextField();
+			maps.text = "Maps";
+			maps.width = 200;
+			maps.height = 50;
+			maps.selectable = false;
+			maps.background = true;
+			maps.backgroundColor = 0xFFFF00;
+			maps.x = (stage.stageWidth - maps.width) >> 1;
+			maps.y = 200;
+			addChild(maps);
+			
+			phone = new TextField();
+			phone.text = "Skype 0412 345 678";
+			phone.width = 200;
+			phone.height = 50;
+			phone.selectable = false;
+			phone.background = true;
+			phone.backgroundColor = 0xFFFF00;
+			phone.x = (stage.stageWidth - phone.width) >> 1;
+			phone.y = 300;
+			addChild(phone);
+			
+			sms = new TextField();
+			sms.text = "Open File";
+			sms.width = 200;
+			sms.height = 50;
+			sms.selectable = false;
+			sms.background = true;
+			sms.backgroundColor = 0xFFFF00;
+			sms.x = (stage.stageWidth - sms.width) >> 1;
+			sms.y = 400;
+			addChild(sms);
+		}
+		
+		protected function onEmailMeTouch(event:MouseEvent):void
+		{
+			trace("Email Me.");
+			navigateToURL(new URLRequest("mailto:Abomination.Legion@gmail.com"));
+		}
+		
+		protected function onBrowserTouch(event:MouseEvent):void
+		{
+			trace("Browse Web.");
+			navigateToURL(new URLRequest("http://www.google.com"));
+		}
+		
+		protected function onMapsTouch(event:MouseEvent):void
+		{
+			trace("Maps.");
+			navigateToURL(new URLRequest("http://maps.google.com"));
+			
+		}
+		
+		protected function onPhoneTouch(event:MouseEvent):void
+		{
+			trace("Phone.");
+			navigateToURL(new URLRequest("tel:0412345678"));
+			
+		}
+		
+		protected function onSMSTouch(event:MouseEvent):void
+		{
+			trace("Open Sample Music");
+			navigateToURL(new URLRequest("C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3"));
+			
+		}
+	}
+}
